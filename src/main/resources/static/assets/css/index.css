@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
+
+
+/* Color Theme Swatches in Hex */
+.Spring-1-hex { color: #F37F80; }
+.Spring-2-hex { color: #F2F2F2; }
+.Spring-3-hex { color: #139394; }
+.Spring-4-hex { color: #ACD052; }
+.Spring-5-hex { color: #F5B168; }
+
+/* Color Theme Swatches in RGBA */
+.Spring-1-rgba { color: rgba(242, 126, 128, 1); }
+.Spring-2-rgba { color: rgba(242, 242, 242, 1); }
+.Spring-3-rgba { color: rgba(18, 147, 147, 1); }
+.Spring-4-rgba { color: rgba(172, 207, 82, 1); }
+.Spring-5-rgba { color: rgba(244, 177, 103, 1); }
+
+/* Color Theme Swatches in HSLA */
+.Spring-1-hsla { color: hsla(359, 82, 72, 1); }
+.Spring-2-hsla { color: hsla(0, 0, 94, 1); }
+.Spring-3-hsla { color: hsla(180, 77, 32, 1); }
+.Spring-4-hsla { color: hsla(77, 57, 56, 1); }
+.Spring-5-hsla { color: hsla(31, 87, 68, 1); }
+
+#boxes{
+    font-family: 'PT Sans', sans-serif;
+}
+
+#card-header {
+    background-color: #F37F80;
+}
+
+body {
+    background-color: #F2F2F2;
+    background-image:url(../img/index/head.jpg);
+}
+
+#mainBackGround{
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.mainInlineText{
+    display: inline-block;
+}
