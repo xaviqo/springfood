@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class IndexViewController {
+public class ViewController {
 
     public static final String NAV_TITLE = "SpringFood";
     public static final String NAV_ADMIN = "Admin Panel";
@@ -31,6 +31,23 @@ public class IndexViewController {
         getDefaultModel(model);
         model.addAttribute("subtitle", "Administrador de pedidos online. Desarrollado con Spring Boot por Xavi.Tech");
         return "main/index";
+    }
+
+    @RequestMapping(value = "/admin")
+    public String admin(Model model) {
+        getDefaultModel(model);
+        model.addAttribute("title","SpringFood - Admin Dashboard");
+        return "admin/index";
+    }
+
+    @RequestMapping(value = "/makeorder")
+    public String order(Model model) {
+        String userName = "NOMBRE";
+        getDefaultModel(model);
+        model.addAttribute("title","SpringFood - Simular Pedido");
+        model.addAttribute("subtitle", "Realiza tu pedido");
+        model.addAttribute("hey","Hola "+userName+"! Que te apetece comer hoy?");
+        return "order/index";
     }
 
 }

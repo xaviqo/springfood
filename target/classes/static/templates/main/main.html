@@ -1,13 +1,12 @@
 <!--HEAD-->
-
 <head th:fragment="index_head">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:text="${title}"></title>
-  <link rel="stylesheet" href="://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
   <link rel="stylesheet" th:href="@{/assets/css/index.css}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://kit.fontawesome.com/092c8041c4.js" crossorigin="anonymous"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -15,7 +14,7 @@
 <!--NAV-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" th:fragment="index_nav">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><i class="fa-solid fa-leaf"></i> SpringFood</a>
+    <a class="navbar-brand" ><i class="fa-solid fa-leaf"></i> <span th:ref="@{/index}">SpringFood</span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,14 +22,14 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/nav/admin}" th:text="${admin}">
+          <a class="nav-link" th:href="@{/admin}" th:text="${admin}">
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" th:text="${registro}"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" th:text="${pedido}"></a>
+          <a class="nav-link" th:href="@{/makeorder}" th:text="${pedido}"></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" th:text="${about}"></a>
