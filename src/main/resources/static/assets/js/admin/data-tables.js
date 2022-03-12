@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // loadAllOrders();
+    getOrders();
     $('#dataTableOrders').DataTable({
         "bLengthChange": false,
         "searching": false,
@@ -34,36 +34,55 @@ function getHeaders() {
     return {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': localStorage.token
+        // 'Authorization': localStorage.token
     };
 }
 
-// async function loadAllOrders() {
+async function getOrders() {
 
-//     const request = await fetch('api/personas', {
-//         method: 'GET',
-//         headers: getHeaders()
-//     });
-//     const personaRequest = await request.json();
+    const request = await fetch('api/orders/getOrders', {
+        method: 'GET',
+        headers: getHeaders()
+    });
+    const personaRequest = await request.json();
 
+    let orderListHTML = '';
 
-//     let fullPersonaHTML = '';
-//     personaRequest.forEach(persona => {
+    let remainOrders = 0;
+    let percent;
 
-//         let idHTML = `<tr><td>${persona.id}</td>`
-//         let nameHTML = `<td>${persona.name}</td>`
-//         let surnameHTML = `<td>${persona.surname}</td>`
-//         let emailHTML = `<td>${persona.email}</td>`
-//         let phoneHTML =`<td>${persona.phone}</td>`
-//         let delButtonHTML = `<td><a href="#" onclick="deletePersona(${persona.id})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>`
+    personaRequest.forEach(order => {
 
-//         fullPersonaHTML += idHTML+nameHTML+surnameHTML+emailHTML+phoneHTML+delButtonHTML;
-//     });
+        if (order.state == true) remainOrders++;
 
-//     document.querySelector('#personas').outerHTML = fullPersonaHTML;
-//     $('#registeredClients').append(`<b>${Object.keys(personaRequest).length}`);
+        //TODO: IF order.state = true X if order.state = false Y
+        //TODO: Implementar direccion en base a cliente (street y city)
 
-// }
+        let idHTML = `<tr><td>${order.id}</td>`
+        let clientHTML = `<td>${order.client}</td>`
+        let TimeStampHTML = `<td>${order.date}</td>`
+        let CityStreetHTML = `<td>TODO</td>`
+        let LineSizeHTML = `<td>${order.lines}</td>`
+        let totalHTML = `<td>${order.total}</td>`
+        let saleHTML = `<td>${order.sale}</td>`
+        let stateHTML = `<td>${order.state}</td>`
+        let delButtonHTML = `<td><a href="#" onclick="deletePersona(${order.id})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>`
+
+        orderListHTML += idHTML + clientHTML + TimeStampHTML + CityStreetHTML + LineSizeHTML + totalHTML + saleHTML + stateHTML + delButtonHTML;
+
+    });
+
+    percent = Math.round((remainOrders/Object.keys(personaRequest).length)*100);
+
+    document.querySelector('#orderListInput').outerHTML = orderListHTML;
+
+    document.querySelector('#remainingOrdersBar').innerHTML = `<div class="progress-bar progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${100-percent}%"></div>`;
+    document.querySelector('#remainingPercent').innerHTML = `${100-percent}%`;
+    document.querySelector('#remainTotal').innerHTML = `${remainOrders} Pedidos`;
+
+    // $('#registeredClients').append(`<b>${Object.keys(personaRequest).length}`);
+
+}
 
 // function getUserEmail() {
 //     document.querySelector('#txtUserEmail').innerHTML=localStorage.email;
