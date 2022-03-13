@@ -1,12 +1,12 @@
 $(document).ready(function () {
     getOrders();
-    $('#dataTableOrders').DataTable({
+    var tableOrders = $('#dataTableOrders').DataTable({
         "bLengthChange": false,
         "searching": false,
         "language": {
             "decimal": "",
             "emptyTable": "No hay pedidos pendientes",
-            "info": "Mostrando _START_ / _END_ de un total de _TOTAL_ pedidos",
+            "info": "",
             "infoPostFix": "",
             "thousands": ",",
             "lengthMenu": "Mostrar _MENU_ pedidos",
@@ -26,6 +26,9 @@ $(document).ready(function () {
             }
         }
     });
+    // setInterval( function () {
+    //     tableOrders.request.reload( null, false );
+    // }, 30000 );
 
     // getUserEmail();
 });
@@ -44,16 +47,24 @@ async function getOrders() {
         method: 'GET',
         headers: getHeaders()
     });
-    const personaRequest = await request.json();
+    const todayOrdersRequest = await request.json();
 
     let orderListHTML = '';
 
     let remainOrders = 0;
     let percent;
+    let orderStatus = "";
 
-    personaRequest.forEach(order => {
+    todayOrdersRequest.forEach(order => {
 
-        if (order.state == true) remainOrders++;
+        console.log(order);
+
+        if (order.state == true) {
+            remainOrders++;
+            orderStatus = `<td class="table-success table-active nnerButtonOrderList">Entregado - <i class="fa-solid fa-toggle-on"></i></td>`;
+        } else {
+            orderStatus = `<td class="table-warning table-active nnerButtonOrderList" >Pendiente - <i class="fa-solid fa-toggle-off"></i></td>`;
+        }
 
         //TODO: IF order.state = true X if order.state = false Y
         //TODO: Implementar direccion en base a cliente (street y city)
@@ -65,16 +76,18 @@ async function getOrders() {
         let LineSizeHTML = `<td>${order.lines}</td>`
         let totalHTML = `<td>${order.total}</td>`
         let saleHTML = `<td>${order.sale}</td>`
-        let stateHTML = `<td>${order.state}</td>`
-        let delButtonHTML = `<td><a href="#" onclick="deletePersona(${order.id})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>`
+        let stateHTML = orderStatus;
+        let linButtonHTML = `<td class="innerButtonOrderList"><a href="#" onclick="viewOrder(${order.id})" class="btn btn-info btn-circle btn-sm"><i class="fa-solid fa-clipboard-list"></i></i></a>`
+        let modButtonHTML = `<a href="#" onclick="modifyOrder(${order.id})" class="btn btn-warning btn-circle btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>`
+        let delButtonHTML = `<a href="#" onclick="deleteOrder(${order.id})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>`
 
-        orderListHTML += idHTML + clientHTML + TimeStampHTML + CityStreetHTML + LineSizeHTML + totalHTML + saleHTML + stateHTML + delButtonHTML;
+        orderListHTML += idHTML + clientHTML + TimeStampHTML + CityStreetHTML + LineSizeHTML + totalHTML + saleHTML + stateHTML + linButtonHTML +  modButtonHTML + delButtonHTML;
 
     });
 
-    percent = Math.round((remainOrders/Object.keys(personaRequest).length)*100);
+    percent = Math.round((remainOrders/Object.keys(todayOrdersRequest).length)*100);
 
-    document.querySelector('#orderListInput').outerHTML = orderListHTML;
+    document.querySelector('#orderListInput').innerHTML = orderListHTML;
 
     document.querySelector('#remainingOrdersBar').innerHTML = `<div class="progress-bar progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${100-percent}%"></div>`;
     document.querySelector('#remainingPercent').innerHTML = `${100-percent}%`;

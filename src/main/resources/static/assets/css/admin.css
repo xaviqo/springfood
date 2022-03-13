@@ -5,3 +5,14 @@
     display: flex;
     justify-content: flex-end;
 }
+.innerButtonOrderList{
+    display: flex;
+    justify-content: center;
+}
+.orderStatus{
+    text-align: center;
+}
+.statusReady{
+}
+.statusPending{
+}

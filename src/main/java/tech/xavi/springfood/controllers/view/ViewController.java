@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewController {
 
     public static final String NAV_TITLE = "SpringFood";
-    public static final String NAV_ADMIN = "Admin Panel";
+    public static final String NAV_ADMIN = "Gestión de pedidos";
+    public static final String NAV_STOCK = "Gestión de stock";
     public static final String NAV_REGISTER = "Registro";
     public static final String NAV_ORDER = "Simular Pedido";
     public static final String NAV_ABOUT = "Sobre SpringFood";
@@ -17,7 +18,8 @@ public class ViewController {
     static Model getDefaultModel(Model model){
 
         model.addAttribute("title",NAV_TITLE);
-        model.addAttribute("admin", NAV_ADMIN);
+        model.addAttribute("admin_orders", NAV_ADMIN);
+        model.addAttribute("admin_stock", NAV_STOCK);
         model.addAttribute("registro", NAV_REGISTER);
         model.addAttribute("pedido", NAV_ORDER);
         model.addAttribute("about", NAV_ABOUT);
@@ -33,14 +35,14 @@ public class ViewController {
         return "main/index";
     }
 
-    @RequestMapping(value = "/admin")
+    @RequestMapping(value = "/manager")
     public String admin(Model model) {
         getDefaultModel(model);
-        model.addAttribute("title","SpringFood - Admin Dashboard");
+        model.addAttribute("title","SpringFood - Dashboard Pedidos");
         return "admin/index";
     }
 
-    @RequestMapping(value = "/makeorder")
+    @RequestMapping(value = "/order")
     public String order(Model model) {
         String userName = "NOMBRE";
         getDefaultModel(model);

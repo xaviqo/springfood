@@ -17,7 +17,7 @@ public class OrderDaoImp implements OrderDao{
 
     @Override
     public List<Orders> getOrders() {
-        String query = "FROM Orders";
+        String query = "FROM Orders ord INNER JOIN Client cli ON ord.client = cli.id";
         return entityManager.createQuery(query).getResultList();
     }
 
