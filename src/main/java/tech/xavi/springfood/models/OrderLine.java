@@ -15,9 +15,6 @@ public class OrderLine {
     @Column(name = "orderid")
     private int order;
 
-    @Column(name = "product")
-    private int product;
-
     @Column(name = "amount")
     private int amount;
 
@@ -29,5 +26,9 @@ public class OrderLine {
 
     @Column(name = "line_sale")
     private int sale;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product")
+    private Product product;
 
 }

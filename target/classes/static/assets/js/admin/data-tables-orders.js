@@ -20,10 +20,17 @@ $(document).ready(function () {
                 "next": "Siguente",
                 "previous": "Previo"
             },
+            "columnDefs": [
+                {
+                    "targets": [5,6],
+                    "width": "10px"
+                }
+            ],
             "aria": {
                 "sortAscending": ": activar para ordenar columnas ascendentes",
                 "sortDescending": ": activar para ordenar columnas descendentes"
-            }
+            },
+            autoWidth: false
         }
     });
     // setInterval( function () {
@@ -43,7 +50,7 @@ function getHeaders() {
 
 async function getOrders() {
 
-    const request = await fetch('api/orders/getOrders', {
+    const request = await fetch('api/orders', {
         method: 'GET',
         headers: getHeaders()
     });
@@ -57,8 +64,6 @@ async function getOrders() {
 
     todayOrdersRequest.forEach(order => {
 
-        console.log(order);
-
         if (order.state == true) {
             remainOrders++;
             orderStatus = `<td class="table-success table-active nnerButtonOrderList">Entregado - <i class="fa-solid fa-toggle-on"></i></td>`;
@@ -67,21 +72,22 @@ async function getOrders() {
         }
 
         //TODO: IF order.state = true X if order.state = false Y
-        //TODO: Implementar direccion en base a cliente (street y city)
+        //TODO: Hacer API introces city devuelvo nombre o buscar si existe una api con esto
+        //TODO: Arreglar problema width datatables
 
         let idHTML = `<tr><td>${order.id}</td>`
-        let clientHTML = `<td>${order.client}</td>`
-        let TimeStampHTML = `<td>${order.date}</td>`
-        let CityStreetHTML = `<td>TODO</td>`
+        let TimeStampHTML = `<td>${parseTime(order.date)}</td>`
+        let clientHTML = `<td>${order.client.name}</td>`
+        let phoneHTML = `<td>${order.client.phone}</td>`
+        let CityStreetHTML = `<td>${order.client.street} (${order.client.city})</td>`
         let LineSizeHTML = `<td>${order.lines}</td>`
-        let totalHTML = `<td>${order.total}</td>`
-        let saleHTML = `<td>${order.sale}</td>`
+        let totalHTML = `<td>${order.total} / ${order.sale}</td>`
         let stateHTML = orderStatus;
         let linButtonHTML = `<td class="innerButtonOrderList"><a href="#" onclick="viewOrder(${order.id})" class="btn btn-info btn-circle btn-sm"><i class="fa-solid fa-clipboard-list"></i></i></a>`
         let modButtonHTML = `<a href="#" onclick="modifyOrder(${order.id})" class="btn btn-warning btn-circle btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>`
         let delButtonHTML = `<a href="#" onclick="deleteOrder(${order.id})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>`
 
-        orderListHTML += idHTML + clientHTML + TimeStampHTML + CityStreetHTML + LineSizeHTML + totalHTML + saleHTML + stateHTML + linButtonHTML +  modButtonHTML + delButtonHTML;
+        orderListHTML += idHTML + TimeStampHTML + clientHTML + phoneHTML + CityStreetHTML + LineSizeHTML + totalHTML + stateHTML + linButtonHTML +  modButtonHTML + delButtonHTML;
 
     });
 

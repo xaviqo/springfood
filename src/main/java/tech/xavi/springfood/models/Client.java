@@ -2,12 +2,11 @@ package tech.xavi.springfood.models;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
+@Entity
+@Table(name = "client")
 public class Client {
 
     @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +29,8 @@ public class Client {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    private int role;
 
 }

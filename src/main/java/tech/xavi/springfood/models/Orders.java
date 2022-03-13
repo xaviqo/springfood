@@ -13,9 +13,6 @@ public class Orders {
     @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "client")
-    private int client;
-
     @Column(name = "date")
     private LocalDateTime date;
 
@@ -30,5 +27,9 @@ public class Orders {
 
     @Column(name = "state")
     private boolean state;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client")
+    private Client client;
 
 }

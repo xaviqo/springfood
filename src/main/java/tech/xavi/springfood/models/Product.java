@@ -4,6 +4,8 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
+@Entity
+@Table(name = "product")
 public class Product {
 
     //TODO como gestionar imagen? Probar con ID ex: id=1337 img/prod/1337.jpg?
@@ -11,8 +13,8 @@ public class Product {
     @Column(name = "id") @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "product")
-    private String product;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "description")
     private String description;

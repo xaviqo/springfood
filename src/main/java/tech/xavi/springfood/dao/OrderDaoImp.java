@@ -2,6 +2,7 @@ package tech.xavi.springfood.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import tech.xavi.springfood.models.OrderLine;
 import tech.xavi.springfood.models.Orders;
 
 import javax.persistence.EntityManager;
@@ -13,17 +14,17 @@ import java.util.List;
 public class OrderDaoImp implements OrderDao{
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager ordersEntityManager;
 
     @Override
-    public List<Orders> getOrders() {
-        String query = "FROM Orders ord INNER JOIN Client cli ON ord.client = cli.id";
-        return entityManager.createQuery(query).getResultList();
+    public List<Object[]> getOrders() {
+        String query = "FROM Orders ord INNER JOIN ord.client";
+        return ordersEntityManager.createQuery(query).getResultList();
     }
 
     @Override
-    public List<Orders> getOrderLines(int id) {
-        String query = "FROM OrderLine WHERE orderid = :id";
-        return entityManager.createQuery(query).setParameter("id",id).getResultList();
+    public List<Object[]> getOrderLines(int id) {
+        String query = "FROM OrderLine orl INNER JOIN orl.product WHERE orderid = :id";
+        return ordersEntityManager.createQuery(query).setParameter("id",id).getResultList();
     }
 }

@@ -1,4 +1,4 @@
-package tech.xavi.springfood.controllers.view;
+package tech.xavi.springfood.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

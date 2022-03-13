@@ -31,13 +31,14 @@ $(document).ready(function () {
 
 async function viewOrder(id) {
 
-    const request = await fetch('api/orders/getOrderLines/' + id, {
+    const request = await fetch('api/orders/' + id, {
         method: 'GET',
         headers: getHeaders()
     });
     const specificOrderRequest = await request.json();
 
     let orderInLinesHTML = '';
+    let orderInLinesText = '';
     let fakeLineId = 0;
     let orderId = 0;
 
@@ -48,19 +49,26 @@ async function viewOrder(id) {
         fakeLineId++;
 
         let lineHTML = `<tr><td>${fakeLineId}</td>`
-        let prodIdHTML = `<td>${line.product}</td>`
-        let prodNameHTML = `<td>${line.product}</td>`
+        let prodNameHTML = `<td>${line.product.name}</td>`
         let amountHTML = `<td>${line.amount}</td>`
         let lineSaleHTML = `<td>${line.sale}%</td>`
         let totalLineSaleHTML = `<td>${line.totalSale}</td>`
         let linModButtonHTML = `<td><a href="#" onclick="modifyLine(${line.id})" class="btn btn-warning btn-circle btn-sm"><i class="fa-solid fa-gear"></i></a>`
         let linDelButtonHTML = `<a href="#" onclick="deleteLine(${line.id})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>`
 
-        orderInLinesHTML += lineHTML + prodIdHTML + prodNameHTML + amountHTML + lineSaleHTML + totalLineSaleHTML + linModButtonHTML + linDelButtonHTML;
+        orderInLinesHTML += lineHTML + prodNameHTML + amountHTML + lineSaleHTML + totalLineSaleHTML + linModButtonHTML + linDelButtonHTML;
 
     });
 
-    document.querySelector('#selectedLineText').innerHTML = `Mostrando <strong>${fakeLineId}</strong> línea del pedido <strong>${orderId}</strong>`;
+    if (fakeLineId > 1){
+        orderInLinesText = `Mostrando <strong>${fakeLineId}</strong> líneas del pedido <strong>${orderId}</strong>`;
+    } else if (fakeLineId == 1){
+        orderInLinesText = `Mostrando <strong>${fakeLineId}</strong> línea del pedido <strong>${orderId}</strong>`;
+    } else {
+        orderInLinesText = `No hay líneas a mostrar en el pedido ${orderId}`;
+    }
+
+    document.querySelector('#selectedLineText').innerHTML = orderInLinesText;
     document.querySelector('#specificOrderInput').innerHTML = orderInLinesHTML;
 
 }
