@@ -1,18 +1,14 @@
 #mainTableDiv{
     overflow-x: hidden;  
 }
-#dataTableOrders_paginate{
+#dataTablePurchases_paginate{
     display: flex;
     justify-content: flex-end;
 }
-.innerButtonOrderList{
+.innerButtonPurchaseList{
     display: flex;
     justify-content: center;
 }
-.orderStatus{
+.purchaseStatus{
     text-align: center;
-}
-.statusReady{
-}
-.statusPending{
 }

@@ -6,25 +6,22 @@ CREATE OR REPLACE FUNCTION FUN_recalculateTotals() RETURNS TRIGGER AS $$
 	
 		--GET PRODUCT PRICE
 		SELECT price INTO productPrice FROM sc_springfood.product pro
-		WHERE pro.id = NEW.product;
+		WHERE pro.product_id = NEW.product;
 		
 		--DO MATHS AND UPDATE NEW.*
-		NEW.total = (productPrice*NEW.amount);
-		NEW.total_sale = NEW.total - (NEW.total*NEW.line_sale/100);
+		NEW.total_line = (productPrice*NEW.amount);
 		
 		--UPDATE MAIN ORDER
-		UPDATE sc_springfood.order 
-		SET total = total + NEW.total_sale
-		WHERE id = NEW.order;
-		
-		RAISE NOTICE 'TOTAL CON DTO: % TOTAL SIN DTO: %',NEW.total_sale,NEW.total;
+		UPDATE sc_springfood.purchase 
+		SET total = total + NEW.total_line
+		WHERE purchase_id = NEW.purchase;
 		
 		RETURN NEW;
 	END;
 $$
 LANGUAGE 'plpgsql';
 
-CREATE TRIGGER TRG_recalculateTotals BEFORE INSERT ON sc_springfood.order_line
+CREATE TRIGGER TRG_recalculateTotals BEFORE INSERT ON sc_springfood.purchase_line
 FOR EACH ROW
 EXECUTE PROCEDURE FUN_recalculateTotals();
 
@@ -34,18 +31,23 @@ CREATE OR REPLACE FUNCTION FUN_updateStock() RETURNS TRIGGER AS $$
 	BEGIN
 		--GET PRODUCT STOCK
 		SELECT stock INTO prodStock FROM sc_springfood.product pro
-		WHERE pro.id = NEW.product;
+		WHERE pro.product_id = NEW.product;
 		
 		IF (prodStock >= NEW.amount) THEN
 			UPDATE sc_springfood.product 
 			SET stock = stock - NEW.amount
-			WHERE id = NEW.product;
+			WHERE product_id = NEW.product;
 		END IF;
 		
 		RETURN NEW;
 	END;
 $$
 LANGUAGE 'plpgsql';
+
+CREATE TRIGGER TRG_updateStock AFTER INSERT ON sc_springfood.purchase_line
+FOR EACH ROW
+EXECUTE PROCEDURE FUN_updateStock();
+
 
 CREATE OR REPLACE FUNCTION FUN_updateLineCount() RETURNS TRIGGER AS $$
 	DECLARE

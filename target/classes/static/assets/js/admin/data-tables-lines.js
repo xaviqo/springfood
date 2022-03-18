@@ -3,35 +3,15 @@ $(document).ready(function () {
     $('#dataTableLines').DataTable({
         "bLengthChange": true,
         "searching": false,
-        "bPaginate": false,
-        "language": {
-            "decimal": "",
-            "emptyTable": "No hay líneas a mostrar",
-            "info": "",
-            "infoPostFix": "",
-            "thousands": ",",
-            "lengthMenu": "Mostrar _MENU_ líneas",
-            "loadingRecords": "Cargando líneas...",
-            "processing": "Procesando líneas...",
-            "search": "Buscar:",
-            "zeroRecords": "No se han encontrado coincidencias",
-            "paginate": {
-                "first": "Primero",
-                "last": "Ultimo",
-                "next": "Siguente",
-                "previous": "Previo"
-            },
-            "aria": {
-                "sortAscending": ": activar para ordenar columnas ascendentes",
-                "sortDescending": ": activar para ordenar columnas descendentes"
-            }
-        }
+        "bPaginate": false
     });
+
+    
 });
 
-async function viewOrder(id) {
+async function viewPurchase(id) {
 
-    const request = await fetch('api/orders/' + id, {
+    const request = await fetch('api/purchase/purchaseLineBy/' + id, {
         method: 'GET',
         headers: getHeaders()
     });
@@ -44,28 +24,28 @@ async function viewOrder(id) {
 
     specificOrderRequest.forEach(line => {
 
-        orderId = line.order;
+        orderId = line.id;
 
         fakeLineId++;
 
         let lineHTML = `<tr><td>${fakeLineId}</td>`
         let prodNameHTML = `<td>${line.product.name}</td>`
         let amountHTML = `<td>${line.amount}</td>`
-        let lineSaleHTML = `<td>${line.sale}%</td>`
-        let totalLineSaleHTML = `<td>${line.totalSale}</td>`
+        let lineSaleHTML = `<td>${line.discount}%</td>`
+        let totalLineHTML = `<td>${line.total}€</td>`
         let linModButtonHTML = `<td><a href="#" onclick="modifyLine(${line.id})" class="btn btn-warning btn-circle btn-sm"><i class="fa-solid fa-gear"></i></a>`
         let linDelButtonHTML = `<a href="#" onclick="deleteLine(${line.id})" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a></td></tr>`
 
-        orderInLinesHTML += lineHTML + prodNameHTML + amountHTML + lineSaleHTML + totalLineSaleHTML + linModButtonHTML + linDelButtonHTML;
+        orderInLinesHTML += lineHTML + prodNameHTML + amountHTML + lineSaleHTML + totalLineHTML + linModButtonHTML + linDelButtonHTML;
 
     });
 
     if (fakeLineId > 1){
-        orderInLinesText = `Mostrando <strong>${fakeLineId}</strong> líneas del pedido <strong>${orderId}</strong>`;
+        orderInLinesText = `Showing <strong>${fakeLineId}</strong> lines of order <strong>${orderId}</strong>`;
     } else if (fakeLineId == 1){
-        orderInLinesText = `Mostrando <strong>${fakeLineId}</strong> línea del pedido <strong>${orderId}</strong>`;
+        orderInLinesText = `Showing <strong>${fakeLineId}</strong> line of order <strong>${orderId}</strong>`;
     } else {
-        orderInLinesText = `No hay líneas a mostrar en el pedido ${orderId}`;
+        orderInLinesText = `No available lines to show in this order`;
     }
 
     document.querySelector('#selectedLineText').innerHTML = orderInLinesText;

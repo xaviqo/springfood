@@ -2,18 +2,17 @@ package tech.xavi.springfood.models;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
+@Entity
+@Table(name = "city")
 public class City {
 
-    @Column(name = "postal") @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int postal;
+    @Column(name = "postal", length = 5) @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String postal;
 
-    @Column(name = "city")
-    private String city;
+    @Column(name = "name", length = 40, nullable = false)
+    private String cityName;
 
 }
