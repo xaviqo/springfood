@@ -24,7 +24,7 @@ async function viewPurchase(id) {
 
     specificOrderRequest.forEach(line => {
 
-        orderId = line.id;
+        orderId = line.purchase;
 
         fakeLineId++;
 

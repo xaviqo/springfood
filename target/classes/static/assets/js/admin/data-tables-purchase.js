@@ -44,9 +44,9 @@ async function getPurchases() {
 
         if (purchase.delivered == true) {
             remainPurchases++;
-            purchaseStatus = `<td class="table-success table-active innerButtonpurchaseList">Entregado - <i class="fa-solid fa-toggle-on"></i></td>`;
+            purchaseStatus = `<td class="table-success table-active innerButtonpurchaseList">Entregado <i class="fa-solid fa-toggle-on"></i></td>`;
         } else {
-            purchaseStatus = `<td class="table-danger table-active innerButtonpurchaseList" >Pendiente - <i class="fa-solid fa-toggle-off"></i></td>`;
+            purchaseStatus = `<td class="table-danger table-active innerButtonpurchaseList" >Pendiente <i class="fa-solid fa-toggle-off"></i></td>`;
         }
 
         //SUM TOTAL EARNINGS
