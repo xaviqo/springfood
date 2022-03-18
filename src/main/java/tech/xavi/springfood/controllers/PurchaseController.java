@@ -5,11 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tech.xavi.springfood.Repository.ProductRepository;
 import tech.xavi.springfood.Repository.dto.PurchaseDto;
+import tech.xavi.springfood.models.Product;
 import tech.xavi.springfood.models.PurchaseLine;
+import tech.xavi.springfood.service.ProductService;
 import tech.xavi.springfood.service.PurchaseService;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -29,8 +30,4 @@ public class PurchaseController {
         return purchaseService.getPurchaseLinePurchaseById(id);
     }
 
-    @GetMapping(name = "/getTotalByDate")
-    private double sumPurchaseTotalByDate(){
-        return purchaseService.sumPurchaseTotalByDate();
-    }
 }

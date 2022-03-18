@@ -11,5 +11,4 @@ public interface PurchaseService {
 
     List<PurchaseLine> getPurchaseLinePurchaseById(Long id);
 
-    double sumPurchaseTotalByDate();
 }

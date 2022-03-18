@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import tech.xavi.springfood.Repository.PurchaseLineRepository;
 import tech.xavi.springfood.Repository.PurchaseRepository;
 import tech.xavi.springfood.Repository.dto.PurchaseDto;
-import tech.xavi.springfood.dao.PurchaseDao;
 import tech.xavi.springfood.models.Purchase;
 import tech.xavi.springfood.models.PurchaseLine;
 
@@ -20,9 +19,6 @@ public class PurchaseServiceImp implements PurchaseService {
 
     @Autowired
     private PurchaseLineRepository purchaseLineRepository;
-
-    @Autowired
-    private PurchaseDao purchaseDao;
 
     @Override
     public List<PurchaseDto> getPurchaseAndCustomer() {
@@ -56,9 +52,5 @@ public class PurchaseServiceImp implements PurchaseService {
         return purchaseLineRepository.getPurchaseLinesByPurchase(id);
     }
 
-    @Override
-    public double sumPurchaseTotalByDate() {
-        return purchaseDao.sumPurchaseTotalByDate();
-    }
 
 }

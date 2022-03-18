@@ -15,7 +15,7 @@ public class ViewController {
     public static final String NAV_ABOUT = "About SpringFood";
     public static final String NAV_LINK = "Xavi.Tech";
 
-    static Model getDefaultModel(Model model){
+    public static Model getDefaultModel(Model model){
 
         model.addAttribute("title",NAV_TITLE);
         model.addAttribute("admin_orders", NAV_ADMIN);
@@ -40,16 +40,6 @@ public class ViewController {
         getDefaultModel(model);
         model.addAttribute("title","SpringFood - Orders Dashboard");
         return "admin/index";
-    }
-
-    @RequestMapping(value = "/order")
-    public String order(Model model) {
-        String userName = "NOMBRE";
-        getDefaultModel(model);
-        model.addAttribute("title","SpringFood - Fake Order");
-        model.addAttribute("subtitle", "Do your order");
-        model.addAttribute("hey","Hey "+userName+"! What do you want to eat today?");
-        return "order/index";
     }
 
 }
