@@ -24,9 +24,8 @@ public class ViewOrderController {
         getDefaultModel(model);
         String userName = "NOMBRE";
         model.addAttribute("title","SpringFood - Fake Order");
-        model.addAttribute("subtitle", "Do your order");
-        model.addAttribute("hey","Hey "+userName+"! What do you want to eat today?");
-
+        model.addAttribute("heyUser",
+                "Hi "+userName+". Your cart is empty, please select any product.");
         List<Product> productList = productService.getProducts();
         model.addAttribute("products",productList);
 

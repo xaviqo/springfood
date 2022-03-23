@@ -31,7 +31,10 @@
           </div>
           <!-- Product actions-->
           <div class="card-footer p-4 pt-0 border-top-0y">
-            <div class="text-center"><a class="btn btn-primary mt-3" href="#">Add to cart</a></div>
+            <div class="text-center">
+              <a class="btn btn-primary mt-3" th href="#" th:attr="onclick=|addToSelected('${product.id}')|">Add to
+                cart</a>
+            </div>
           </div>
         </div>
       </div>
@@ -40,17 +43,22 @@
 </section>
 
 <div class="container-fluid" id="mainOrderDiv">
-  <div class="col-xl-10 col-lg-8">
+  <div class="col-xl-8 col-lg-8">
     <div class="card shadow">
-      <div class="card-header" th:text="${subtitle}"></div>
       <div class="card-body">
-        <h4 class="card-title" th:text="${hey}"></h4>
+        <div class="text-center" id="heyUserDiv">
+          <span th:text="${heyUser}"></span>
+        </div>
+        <div th:replace="order/selectedProducts :: list"></div>
+      </div>
+      <div class="card-footer p-4 pt-0 border-top-0y">
+        <div class="text-center">
+          <button type="button" id="btnSend" class="btn btn-primary mt-3" href="#" onclick="sendOrder()" disabled>Send order</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div th:replace="order/order :: foot"></div>
-</body>
+    <div th:replace="order/order :: foot"></div>
+    </body>
 
 </html>

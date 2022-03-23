@@ -11,7 +11,7 @@ $(document).ready(function () {
 
 async function viewPurchase(id) {
 
-    const request = await fetch('api/purchase/purchaseLineBy/' + id, {
+    const request = await fetch('api/dashboard/purchaseLineBy/' + id, {
         method: 'GET',
         headers: getHeaders()
     });

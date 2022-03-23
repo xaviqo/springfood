@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tech.xavi.springfood.Repository.PurchaseLineRepository;
 import tech.xavi.springfood.Repository.PurchaseRepository;
-import tech.xavi.springfood.Repository.dto.PurchaseDto;
+import tech.xavi.springfood.Repository.dto.PurchaseDashboardDto;
 import tech.xavi.springfood.models.Purchase;
 import tech.xavi.springfood.models.PurchaseLine;
 
@@ -21,34 +21,34 @@ public class PurchaseServiceImp implements PurchaseService {
     private PurchaseLineRepository purchaseLineRepository;
 
     @Override
-    public List<PurchaseDto> getPurchaseAndCustomer() {
+    public List<PurchaseDashboardDto> getPurchaseAndCustomer() {
 
-        ArrayList<PurchaseDto> purchaseDtoList = new ArrayList<>();
+        ArrayList<PurchaseDashboardDto> purchaseDashboardDtoList = new ArrayList<>();
 
         for (Purchase purchase : purchaseRepository.findAll()) {
 
-            PurchaseDto purchaseDto = new PurchaseDto();
+            PurchaseDashboardDto purchaseDashboardDto = new PurchaseDashboardDto();
 
-            purchaseDto.setId(purchase.getId());
-            purchaseDto.setDate(purchase.getDate());
-            purchaseDto.setDiscount(purchase.getDiscount());
-            purchaseDto.setTotal(purchase.getTotal());
-            purchaseDto.setDelivered(purchase.isDelivered());
-            purchaseDto.setCustomerName(purchase.getCustomer().getCustomerName());
-            purchaseDto.setPhone(purchase.getCustomer().getPhone());
-            purchaseDto.setCity(purchase.getCustomer().getCity());
-            purchaseDto.setStreet(purchase.getCustomer().getStreet());
+            purchaseDashboardDto.setId(purchase.getId());
+            purchaseDashboardDto.setDate(purchase.getDate());
+            purchaseDashboardDto.setDiscount(purchase.getDiscount());
+            purchaseDashboardDto.setTotal(purchase.getTotal());
+            purchaseDashboardDto.setDelivered(purchase.isDelivered());
+            purchaseDashboardDto.setCustomerName(purchase.getCustomer().getCustomerName());
+            purchaseDashboardDto.setPhone(purchase.getCustomer().getPhone());
+            purchaseDashboardDto.setCity(purchase.getCustomer().getCity());
+            purchaseDashboardDto.setStreet(purchase.getCustomer().getStreet());
 
-            purchaseDtoList.add(purchaseDto);
+            purchaseDashboardDtoList.add(purchaseDashboardDto);
 
         }
 
-        return purchaseDtoList;
+        return purchaseDashboardDtoList;
 
     }
 
     @Override
-    public List<PurchaseLine> getPurchaseLinePurchaseById(Long id) {
+    public List<PurchaseLine> getPurchaseLinePurchaseById(long id) {
         return purchaseLineRepository.getPurchaseLinesByPurchase(id);
     }
 

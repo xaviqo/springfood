@@ -34,6 +34,7 @@
 body {
     background-color: #F2F2F2;
     background-image:url(../img/index/head.jpg);
+    background-position: center;
 }
 
 #mainBackGround{

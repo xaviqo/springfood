@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Component
 @Data
-public class PurchaseDto {
+public class PurchaseDashboardDto {
 
     private long id;
     private LocalDateTime date;

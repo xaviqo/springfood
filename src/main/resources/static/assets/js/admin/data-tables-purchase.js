@@ -17,17 +17,9 @@ $(document).ready(function () {
 
 });
 
-function getHeaders() {
-    return {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        // 'Authorization': localStorage.token
-    };
-}
-
 async function getPurchases() {
 
-    const request = await fetch('api/purchase/getAllPurchaseDto', {
+    const request = await fetch('api/dashboard/getAllPurchaseDto', {
         method: 'GET',
         headers: getHeaders()
     });
