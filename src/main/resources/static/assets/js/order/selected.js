@@ -3,7 +3,7 @@ let productsArray = [];
 
 async function addToSelected(id) {
 
-    e.preventDefault();
+    // e.preventDefault();
 
     //activate table for first time
     if (!active) {
