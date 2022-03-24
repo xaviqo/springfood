@@ -1,14 +1,13 @@
 package tech.xavi.springfood.service;
 
-import tech.xavi.springfood.Repository.dto.PurchaseDashboardDto;
 import tech.xavi.springfood.models.PurchaseLine;
+import tech.xavi.springfood.repository.projection.IPurchaseDashboard;
 
 import java.util.List;
 
 public interface PurchaseService {
 
-    List<PurchaseDashboardDto> getPurchaseAndCustomer();
-
+    List<IPurchaseDashboard> getPurchaseAndCustomer();
     List<PurchaseLine> getPurchaseLinePurchaseById(long id);
 
 }

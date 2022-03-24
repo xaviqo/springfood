@@ -21,7 +21,7 @@ public class Product {
     private long id;
 
     @Column(name = "name", length = 40, nullable = false)
-    private String name;
+    private String productName;
 
     @Column(name = "description")
     private String description;

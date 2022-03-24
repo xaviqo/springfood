@@ -1,42 +1,60 @@
 let active = false;
 let productsArray = [];
 
-$(document).ready(function () {
-    
-    reloadDataTable();
-
-});
-
 async function addToSelected(id) {
 
-    event.preventDefault();
+    e.preventDefault();
 
-    //activate table and datatables for first time
-    if (!active){
+    //activate table for first time
+    if (!active) {
         $("#heyUserDiv").hide();
         $("#dataTablesCartList").show();
         $('#btnSend').prop("disabled", false);
         active = true;
     }
 
-    const request = await fetch('api/order/getProductDto/' + id, {
+    const request = await fetch('api/order/getProductCart/' + id, {
         method: 'GET',
         headers: getHeaders()
     });
 
-    const productInfo = await request.json();
+    const productJSON = await request.json();
 
-    reloadDataTable();
-    
+    //check if the product is already in the array
+    if (!existsId(productJSON.productId)) {
+
+        let addSelectedProductHTML = "";
+
+        //add product to array and sum 1 unit to amount
+        let product = { id: productJSON.productId, quantity: 1 };
+        productsArray.push(product);
+
+        //create line
+
+        addSelectedProductHTML += `<tr id="product${productJSON.productId}" ><td scope="row">${productJSON.productName}</td>`;
+        addSelectedProductHTML += `<td>${product.quantity}</td>`;
+        addSelectedProductHTML += `<td>${productJSON.price}</td>`;
+        addSelectedProductHTML += `<td> ACTIONS HERE </td></tr>`;
+
+        document.querySelector('#dataTablesCartList tbody').innerHTML += addSelectedProductHTML;
+    }
+
+    // reloadDataTable(); //fix reload
+
 }
 
-function reloadDataTable(){
+$("#btnSend").click(async function (e) { 
+    e.preventDefault();
+    
+    for (let product of Object.values(productsArray)) {
+        if (product.id === searchId) return true;
+    }
 
-    $('#dataTablesCartList').DataTable({
-        "bLengthChange": true,
-        "searching": false,
-        "bPaginate": false,
-        "bInfo" : false
-    });
+});
 
+function existsId(searchId) {
+    for (let product of Object.values(productsArray)) {
+        if (product.id === searchId) return true;
+    }
+    return false;
 }

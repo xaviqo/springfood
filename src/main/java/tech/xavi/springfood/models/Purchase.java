@@ -14,7 +14,7 @@ public class Purchase {
     @Column(name = "purchase_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long purchaseId;
 
     @Column(name = "date", nullable = false)
     private LocalDateTime date;
@@ -23,7 +23,7 @@ public class Purchase {
     private short discount;
 
     @Column(name = "total")
-    private double total;
+    private double purchaseTotal;
 
     @Column(name = "is_delivered", nullable = false)
     private boolean isDelivered;

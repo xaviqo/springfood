@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tech.xavi.springfood.Repository.dto.PurchaseDashboardDto;
 import tech.xavi.springfood.models.PurchaseLine;
+import tech.xavi.springfood.repository.projection.IPurchaseDashboard;
 import tech.xavi.springfood.service.PurchaseService;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class DashboardController {
     PurchaseService purchaseService;
 
     @GetMapping("/getAllPurchaseDto")
-    private List<PurchaseDashboardDto> getPurchaseAndCostumer(){
+    private List<IPurchaseDashboard> getPurchaseAndCostumer(){
         return purchaseService.getPurchaseAndCustomer();
     }
 

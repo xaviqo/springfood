@@ -1,4 +1,4 @@
-package tech.xavi.springfood.Repository;
+package tech.xavi.springfood.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import tech.xavi.springfood.models.PurchaseLine;

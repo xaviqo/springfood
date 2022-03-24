@@ -26,20 +26,25 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/stock}" th:text="${admin_stock}">
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" th:text="${register}"></a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" th:href="@{/makeorder}" th:text="${order}"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" th:text="${about}"></a>
+          <a class="nav-link" th:href="@{/register}" th:text="${register}"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" th:text="${xavitech}"></a>
+          <a class="nav-link" th:href="@{/login}" th:text="${login}"></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" th:text="${admin_stock}">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" th:text="${about}">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" th:text="${xavitech}">
+          </a>
         </li>
       </ul>
     </div>

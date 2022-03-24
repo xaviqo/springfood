@@ -1,7 +1,3 @@
-$(document).ready(function () {
-  
-});
-
 function parseTime(date) {
 
   return new Date(date).toLocaleDateString(

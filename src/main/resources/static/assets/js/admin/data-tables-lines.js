@@ -3,7 +3,8 @@ $(document).ready(function () {
     $('#dataTableLines').DataTable({
         "bLengthChange": true,
         "searching": false,
-        "bPaginate": false
+        "bPaginate": false,
+        "info": false
     });
 
     
@@ -29,7 +30,7 @@ async function viewPurchase(id) {
         fakeLineId++;
 
         let lineHTML = `<tr><td>${fakeLineId}</td>`
-        let prodNameHTML = `<td>${line.product.name}</td>`
+        let prodNameHTML = `<td>${line.product.productName}</td>`
         let amountHTML = `<td>${line.amount}</td>`
         let lineSaleHTML = `<td>${line.discount}%</td>`
         let totalLineHTML = `<td>${line.total}€</td>`
