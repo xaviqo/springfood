@@ -14,40 +14,42 @@
                             </div>
                             <form class="user">
                                 <div class="form-group row">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="nameSurname"
+                                            placeholder="Name and Surname">
+                                    </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="nameTxt"
-                                            placeholder="First Name">
+                                        <input type="text" class="form-control" id="emailTxt"
+                                            placeholder="Email">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="surnameTxt"
-                                            placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="emailTxt"
-                                        placeholder="Email Address">
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="tel" class="form-control form-control-user"
-                                            id="cityTxt" placeholder="Phone Number">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="streetTxt" placeholder="Repeat Password">
+                                        <input type="text" class="form-control" id="phoneTxt"
+                                            placeholder="Phone">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
+                                        <select class="form-control" id="cityTxt">
+                                            <option value="null">City</option>
+                                            <option th:each="city : ${cities}" th:value="${city.postal}" th:text="${city.cityName}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control"
+                                            id="streetTxt" placeholder="Street">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control"
                                             id="inputPassTxt" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
+                                        <input type="password" class="form-control"
                                             id="repeatPassTxt" placeholder="Repeat Password">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                <a href="#" class="btn btn-primary btn-user btn-block" onclick="createAccount()">
                                     Register Account
                                 </a>
                             </form>
@@ -64,3 +66,5 @@
 </body>
 
 </html>
+
+<div th:replace="register/register :: foot"></div>
